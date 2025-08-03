@@ -60,12 +60,21 @@ async function upscaleImage() {
       })
       .toBuffer();
 
-   
+  
+    let config = {};
+    try {
+      const data = await fs.readFile('config.json', 'utf8');
+      config = JSON.parse(data);
+    } catch (error) {
+      console.error('config.jsonの読み込みに失敗:', error);
+      config = { download: require('path').join(require('os').homedir(), 'Downloads') };
+    }
+
     const newFilename = `${file.name.replace(/\.[^/.]+$/, '')}_2x.${file.type.split('/')[1]}`;
-    const downloadPath = require('path').join(require('os').homedir(), 'Downloads', newFilename);
+    const downloadPath = require('path').join(config.download, newFilename);
     await fs.writeFile(downloadPath, upscaled);
 
- 
+  
     const upscaledDataUrl = `data:image/${file.type.split('/')[1]};base64,${upscaled.toString('base64')}`;
     document.getElementById('result').innerHTML = `<img src="${upscaledDataUrl}" id="upscaled">`;
 
