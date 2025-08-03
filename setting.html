@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>設定</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="sidebar">
+    <button id="backBtn" onclick="window.location.href='./index.html'">←戻る</button>
+    <div class="tab">一般</div>
+  </div>
+  <div class="content">
+    <h1>設定</h1>
+    <div class="setting-item">
+      <label>ダウンロード先</label>
+      <div>
+        <input type="text" id="downloadPath" readonly>
+        <button id="browseBtn">参照</button>
+      </div>
+    </div>
+    <div class="setting-item">
+      <label>言語</label>
+      <select id="language">
+        <option value="ja">日本語</option>
+      </select>
+    </div>
+  </div>
+  <script src="settings.js"></script>
+</body>
+</html>
