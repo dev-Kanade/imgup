@@ -1,11 +1,25 @@
 const { ipcRenderer } = require('electron');
 const sharp = require('sharp');
 const fs = require('fs').promises;
-const { download } = require('electron').remote; 
 
 document.getElementById('imageInput').addEventListener('change', (e) => {
   const file = e.target.files[0];
+  const errorMsg = document.getElementById('errorMsg');
+  if (errorMsg) errorMsg.remove();
+
   if (file) {
+    const maxSize = 200 * 1024 * 1024; 
+    if (file.size > maxSize) {
+      const error = document.createElement('span');
+      error.id = 'errorMsg';
+      error.textContent = 'ファイルが大きすぎます';
+      error.style.color = 'red';
+      error.style.marginLeft = '10px';
+      document.getElementById('imageInput').parentNode.appendChild(error);
+      document.getElementById('result').innerHTML = '';
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = (event) => {
       document.getElementById('result').innerHTML = `<img src="${event.target.result}" id="preview">`;
@@ -16,9 +30,23 @@ document.getElementById('imageInput').addEventListener('change', (e) => {
 
 async function upscaleImage() {
   const fileInput = document.getElementById('imageInput');
+  const errorMsg = document.getElementById('errorMsg');
+  if (errorMsg) errorMsg.remove();
+
   if (!fileInput.files[0]) return alert('画像を選択してください。');
 
   const file = fileInput.files[0];
+  const maxSize = 200 * 1024 * 1024; 
+  if (file.size > maxSize) {
+    const error = document.createElement('span');
+    error.id = 'errorMsg';
+    error.textContent = 'ファイルが大きすぎます';
+    error.style.color = 'red';
+    error.style.marginLeft = '10px';
+    document.getElementById('imageInput').parentNode.appendChild(error);
+    return;
+  }
+
   try {
     const arrayBuffer = await file.arrayBuffer();
     const image = sharp(arrayBuffer);
@@ -32,12 +60,12 @@ async function upscaleImage() {
       })
       .toBuffer();
 
-
+   
     const newFilename = `${file.name.replace(/\.[^/.]+$/, '')}_2x.${file.type.split('/')[1]}`;
     const downloadPath = require('path').join(require('os').homedir(), 'Downloads', newFilename);
     await fs.writeFile(downloadPath, upscaled);
 
-
+ 
     const upscaledDataUrl = `data:image/${file.type.split('/')[1]};base64,${upscaled.toString('base64')}`;
     document.getElementById('result').innerHTML = `<img src="${upscaledDataUrl}" id="upscaled">`;
 
