@@ -4,53 +4,76 @@ body {
   padding: 0;
   background: linear-gradient(to right, #e0f7fa, #b2ebf2);
   display: flex;
-}
-
-.sidebar {
-  width: 200px;
-  background: rgba(255, 255, 255, 0.7);
-  height: 100vh;
-  padding: 20px;
-  display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#backBtn {
+.header {
+  display: flex;
+  align-items: center;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
+  padding: 20px;
+  background: linear-gradient(to right, #e0f7fa, #b2ebf2);
 }
 
-.tab {
-  font-size: 18px;
-  margin: 10px 0;
+#settingsIcon {
+  margin-right: 20px;
 }
 
 .content {
-  flex-grow: 1;
-  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
 
-.setting-item {
-  margin-bottom: 20px;
+.dashed-box {
+  border: 2px dashed black;
+  padding: 50px;
+  width: 500px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.setting-item label {
-  display: block;
-  margin-bottom: 5px;
+#uploadLink {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
-#downloadPath {
+#errorMsg {
+  margin-top: 10px;
+}
+
+#result img {
+  max-width: 100%;
+  margin-top: 20px;
+}
+
+#fileSelected p {
+  margin-bottom: 10px;
+}
+
+#upscaleBtn, #reselectBtn, #cancelBtn, #backBtn, #saveBtn {
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+#upscaling p {
+  margin: 20px 0;
+}
+
+#progressBar {
   width: 300px;
-  padding: 5px;
+  height: 20px;
 }
 
-#browseBtn {
-  padding: 5px 10px;
+#completed img {
+  margin: 10px 0;
+}
+
+#saveBtn {
   margin-left: 10px;
-}
-
-select {
-  padding: 5px;
 }

@@ -9,7 +9,7 @@ const fs = require('fs').promises;
     config = JSON.parse(data);
   } catch (error) {
     console.error('config.jsonの読み込みに失敗:', error);
-    config = { download: 'c:/user/download', language: 'ja' };
+    config = { download: '"C:\\Users\\miyac\\Downloads', language: 'ja' };
     await fs.writeFile('config.json', JSON.stringify(config, null, 2));
   }
 
