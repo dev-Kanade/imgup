@@ -10,5 +10,5 @@ app.on('ready', () => {
       contextIsolation: false, 
     },
   });
-  win.loadFile('index.html'); 
+  win.loadFile('./index.html'); 
 });
