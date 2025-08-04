@@ -7,9 +7,6 @@
   },
   "dependencies": {
     "electron": "^28.0.0",
-    "sharp": "^0.32.6",
-    "upscaler": "^1.0.0-beta.19",
-    "@upscalerjs/esrgan-thick": "^1.0.0-beta.12",
-    "@tensorflow/tfjs-node": "^4.0.0"
+    "sharp": "^0.32.6"
   }
 }

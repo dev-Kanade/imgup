@@ -11,7 +11,6 @@
     <h1>画像を鮮明にする</h1>
   </div>
   <div class="content" id="content">
-   
     <div class="drop-zone" id="dropZone">
       <div class="dashed-box">
         <p>ここにドロップするか</p>
@@ -20,22 +19,16 @@
       <input type="file" id="imageInput" accept="image/png, image/jpeg" style="display: none;">
       <span id="errorMsg" style="color: red; display: none;"></span>
     </div>
-
-  
     <div id="fileSelected" style="display: none;">
       <p id="selectedFileName"></p>
       <button id="upscaleBtn">スケールアップ</button>
       <button id="reselectBtn">←ファイルを選択しなおす</button>
     </div>
-
-
     <div id="upscaling" style="display: none;">
       <button id="cancelBtn">←中止する</button>
       <p>スケールアップ中</p>
       <progress id="progressBar" value="0" max="100"></progress>
     </div>
-
-  
     <div id="completed" style="display: none;">
       <button id="backBtn">←戻る</button>
       <p>スケールアップが完了しました！</p>
