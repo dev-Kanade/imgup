@@ -1,5 +1,9 @@
 body {
-  background: linear-gradient(135deg, #87CEEB, #ADD8E6); /* 青のグラデーション */
+  background: linear-gradient(135deg, #87CEEB, #ADD8E6); 
+  color: #333;
+}
+
+#themeText {
   color: #333;
 }
 
