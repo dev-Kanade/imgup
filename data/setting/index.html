@@ -6,7 +6,9 @@
   <title>設定</title>
   <link rel="stylesheet" href="styles.css">
   <script>
-    
+   
+    const fs = require('fs').promises;
+
     window.addEventListener('load', () => {
       fetch('../../config.json')
         .then(response => response.json())
@@ -18,7 +20,15 @@
           document.head.appendChild(themeLink);
           updateThemeRadio(theme); 
         })
-        .catch(error => console.error('Theme load error:', error));
+        .catch(error => {
+          console.error('Theme load error:', error);
+          const errorMsg = document.getElementById('errorMsg');
+          if (errorMsg) {
+            errorMsg.textContent = 'テーマの読み込みに失敗しました。';
+            errorMsg.style.display = 'block';
+            errorMsg.style.color = 'red';
+          }
+        });
     });
 
     function updateThemeRadio(selectedTheme) {
@@ -27,18 +37,28 @@
       });
     }
 
-    function saveTheme(themeValue) {
-  fetch('../../config.json')
-    .then(response => response.json())
-    .then(config => {
-      config.theme = themeValue;
-      return window.ipcRenderer.invoke('save-config', config);
-    })
-    .then(result => {
-      if (result.success) {
+    async function saveTheme(themeValue) {
+      try {
+       
+        let config = {};
+        try {
+          const data = await fs.readFile('../../config.json', 'utf8');
+          config = JSON.parse(data);
+        } catch (readError) {
+          console.error('config.jsonの読み込みに失敗:', readError);
+          config = { download: require('path').join(require('os').homedir(), 'Downloads'), theme: '3' };
+        }
+
+     
+        config.theme = themeValue;
+
+      
+        await fs.writeFile('../../config.json', JSON.stringify(config, null, 2), 'utf8');
+        console.log('Theme saved successfully:', config);
+
         setTimeout(() => location.reload(), 1000);
-      } else {
-        console.error('Save failed:', result.error);
+      } catch (error) {
+        console.error('Theme save error:', error);
         const errorMsg = document.getElementById('errorMsg');
         if (errorMsg) {
           errorMsg.textContent = 'テーマの保存に失敗しました。';
@@ -46,17 +66,7 @@
           errorMsg.style.color = 'red';
         }
       }
-    })
-    .catch(error => {
-      console.error('Theme save error:', error);
-      const errorMsg = document.getElementById('errorMsg');
-      if (errorMsg) {
-        errorMsg.textContent = 'テーマの保存に失敗しました。';
-        errorMsg.style.display = 'block';
-        errorMsg.style.color = 'red';
-      }
-    });
-}
+    }
   </script>
 </head>
 <body>
@@ -94,7 +104,7 @@
       </div>
       <div id="model" class="tab-pane">
         <h2>モデル設定</h2>
-        <p>開発中。</p>
+        <p>開発中です。</p>
       </div>
       <div id="advanced" class="tab-pane">
         <h2>高度な設定</h2>
@@ -108,6 +118,10 @@
         </div>
       </div>
     </div>
+    <div style="text-align: center; margin-top: 20px;">
+      <p id="themeText">テキスト</p>
+    </div>
+    <span id="errorMsg" style="display: none;"></span>
   </div>
   <script src="script.js"></script>
 </body>
