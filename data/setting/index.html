@@ -6,8 +6,6 @@
   <title>設定</title>
   <link rel="stylesheet" href="styles.css">
   <script>
-   
-    const fs = require('fs').promises;
 
     window.addEventListener('load', () => {
       fetch('../../config.json')
@@ -37,35 +35,30 @@
       });
     }
 
-    async function saveTheme(themeValue) {
-      try {
-       
-        let config = {};
-        try {
-          const data = await fs.readFile('../../config.json', 'utf8');
-          config = JSON.parse(data);
-        } catch (readError) {
-          console.error('config.jsonの読み込みに失敗:', readError);
-          config = { download: require('path').join(require('os').homedir(), 'Downloads'), theme: '3' };
-        }
-
-     
-        config.theme = themeValue;
-
-      
-        await fs.writeFile('../../config.json', JSON.stringify(config, null, 2), 'utf8');
-        console.log('Theme saved successfully:', config);
-
-        setTimeout(() => location.reload(), 1000);
-      } catch (error) {
-        console.error('Theme save error:', error);
-        const errorMsg = document.getElementById('errorMsg');
-        if (errorMsg) {
-          errorMsg.textContent = 'テーマの保存に失敗しました。';
-          errorMsg.style.display = 'block';
-          errorMsg.style.color = 'red';
-        }
-      }
+    function saveTheme(themeValue) {
+      fetch('../../config.json')
+        .then(response => response.json())
+        .then(config => {
+          config.theme = themeValue;
+          return fetch('../../config.json', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(config)
+          });
+        })
+        .then(() => {
+        
+          setTimeout(() => location.reload(), 1000);
+        })
+        .catch(error => {
+          console.error('Theme save error:', error);
+          const errorMsg = document.getElementById('errorMsg');
+          if (errorMsg) {
+            errorMsg.textContent = 'テーマの保存に失敗しました。';
+            errorMsg.style.display = 'block';
+            errorMsg.style.color = 'red';
+          }
+        });
     }
   </script>
 </head>
@@ -104,7 +97,7 @@
       </div>
       <div id="model" class="tab-pane">
         <h2>モデル設定</h2>
-        <p>開発中です。</p>
+        <p>開発中</p>
       </div>
       <div id="advanced" class="tab-pane">
         <h2>高度な設定</h2>
@@ -125,4 +118,4 @@
   </div>
   <script src="script.js"></script>
 </body>
-</html>
+</html> 
