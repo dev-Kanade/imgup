@@ -80,7 +80,7 @@ function handleFiles(files) {
     return;
   }
 
-  const maxSize = 200 * 1024 * 1024; // 200MB in bytes
+  const maxSize = 200 * 1024 * 1024; 
   if (file.size > maxSize) {
     showError('ファイルが大きすぎます');
     return;
@@ -173,18 +173,18 @@ async function upscaleImage() {
     const sharpImage = sharp(arrayBuffer);
     const metadata = await sharpImage.metadata();
 
-    // sharpで2倍にリサイズし、画質を向上
+    
     const upscaledBuffer = await sharpImage
       .resize({
         width: metadata.width * 2,
         height: metadata.height * 2,
-        kernel: 'cubic', // 画質を改善する補間方法
-        fit: 'contain', // 元の縦横比を維持
+        kernel: 'cubic', 
+        fit: 'contain', 
       })
-      .sharpen({ // シャープニングを適用
-        sigma: 1, // シャープニングの強度
-        flat: 1.0, // 平坦領域の調整
-        jagged: 2.0 // エッジの強調
+      .sharpen({ 
+        sigma: 1, 
+        flat: 1.0, 
+        jagged: 2.0 
       })
       .toBuffer();
 
@@ -207,4 +207,5 @@ function showError(message) {
     errorMsg.style.display = 'block';
   }
   document.getElementById('result').innerHTML = '';
+
 }
