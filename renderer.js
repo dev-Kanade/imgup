@@ -1,9 +1,16 @@
 const { ipcRenderer } = require('electron');
-const sharp = require('sharp');
+const { Upscaler } = require('upscaler');
 const fs = require('fs').promises;
+const tf = require('@tensorflow/tfjs-node');
+
+
+const upscaler = new Upscaler({
+  model: require('@upscalerjs/esrgan-thick/2x'), 
+  scale: 2,
+});
 
 document.getElementById('settingsIcon').addEventListener('click', () => {
-  window.location.href = './setting.html';
+  window.location.href = './settings.html';
 });
 
 const dropZone = document.getElementById('dropZone');
@@ -72,10 +79,10 @@ reselectBtn.addEventListener('click', () => {
   document.getElementById('result').innerHTML = '';
 });
 
-upscaleBtn.addEventListener('click', () => {
+upscaleBtn.addEventListener('click', async () => {
   fileSelected.style.display = 'none';
   upscaling.style.display = 'block';
-  upscaleImage();
+  await upscaleImage();
 });
 
 cancelBtn.addEventListener('click', () => {
@@ -100,8 +107,11 @@ saveBtn.addEventListener('click', async () => {
     console.error('config.jsonの読み込みに失敗:', error);
     config = { download: require('path').join(require('os').homedir(), 'Downloads') };
   }
-  const downloadPath = require('path').join(config.download, upscaledImage.src.split(';base64,')[0].split('/')[1]);
-  await fs.writeFile(downloadPath, Buffer.from(upscaledImage.src.split(',')[1], 'base64'));
+  const file = imageInput.files[0];
+  const newFilename = `${file.name.replace(/\.[^/.]+$/, '')}_2x.${file.type.split('/')[1]}`;
+  const downloadPath = require('path').join(config.download, newFilename);
+  const upscaledBuffer = await fs.readFile(upscaledImage.src.split(',')[1], 'base64');
+  await fs.writeFile(downloadPath, upscaledBuffer);
   alert('画像が保存されました。');
 });
 
@@ -118,20 +128,17 @@ async function upscaleImage() {
 
   try {
     const arrayBuffer = await file.arrayBuffer();
-    const image = sharp(arrayBuffer);
-
-    const metadata = await image.metadata();
-    const upscaled = await image
-      .resize({
-        width: metadata.width * 2,
-        height: metadata.height * 2,
-        kernel: 'lanczos3',
-      })
-      .toBuffer();
+    const imageBitmap = await createImageBitmap(new Blob([arrayBuffer]));
+    const canvas = document.createElement('canvas');
+    canvas.width = imageBitmap.width;
+    canvas.height = imageBitmap.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(imageBitmap, 0, 0);
+    const upscaledTensor = await upscaler.upscale(canvas);
+    const upscaledCanvas = await tf.browser.toPixels(upscaledTensor);
+    upscaledImage.src = upscaledCanvas.toDataURL();
 
     upscaling.style.display = 'none';
-    const upscaledDataUrl = `data:image/${file.type.split('/')[1]};base64,${upscaled.toString('base64')}`;
-    upscaledImage.src = upscaledDataUrl;
     completed.style.display = 'block';
   } catch (error) {
     console.error('エラー:', error);
