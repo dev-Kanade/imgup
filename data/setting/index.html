@@ -12,9 +12,9 @@
         .then(response => response.json())
         .then(config => {
           const theme = config.theme;
-          const themeLink = document.createElement('theme');
+          const themeLink = document.createElement('link');
           themeLink.rel = 'stylesheet';
-          themeLink.href = `../css/theme/${theme}.css`;
+          themeLink.href = `../css/theme${theme}.css`;
           document.head.appendChild(themeLink);
           updateThemeRadio(theme); 
         })
@@ -39,7 +39,7 @@
           });
         })
         .then(() => {
-         
+          
           setTimeout(() => location.reload(), 1000);
         })
         .catch(error => console.error('Theme save error:', error));
@@ -48,7 +48,7 @@
 </head>
 <body>
   <div class="header" id="header">
-    <img src="../back-icon.png" alt="Back" onclick="window.location.href='../index.html'" style="width: 24px; height: 24px; cursor: pointer;">
+    <span onclick="window.location.href='../../index.html'">←戻る</span>
     <h1>設定</h1>
   </div>
   <div class="content" id="content">
@@ -81,7 +81,7 @@
       </div>
       <div id="model" class="tab-pane">
         <h2>モデル設定</h2>
-        <p>モデルイメージは後で提供されます。プレースホルダです。</p>
+        <p>開発中。</p>
       </div>
       <div id="advanced" class="tab-pane">
         <h2>高度な設定</h2>
