@@ -173,18 +173,18 @@ async function upscaleImage() {
     const sharpImage = sharp(arrayBuffer);
     const metadata = await sharpImage.metadata();
 
-   
+ 
     const upscaledBuffer = await sharpImage
       .resize({
         width: metadata.width * 2,
         height: metadata.height * 2,
-        kernel: 'cubic', 
-        fit: 'contain', 
+        kernel: 'cubic',
+        fit: 'contain',
       })
-      .sharpen({ 
-        sigma: 1, 
-        flat: 1.0, 
-        jagged: 2.0 
+      .sharpen({
+        sigma: 1,
+        flat: 1.0,
+        jagged: 2.0
       })
       .toBuffer();
 
@@ -205,6 +205,7 @@ function showError(message) {
   if (errorMsg) {
     errorMsg.textContent = message;
     errorMsg.style.display = 'block';
+    errorMsg.style.color = 'red';
   }
   document.getElementById('result').innerHTML = '';
 }
