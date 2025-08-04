@@ -3,6 +3,10 @@ body {
   color: white;
 }
 
+#themeText {
+  color: white;
+}
+
 .header {
   background-color: #444444;
 }
