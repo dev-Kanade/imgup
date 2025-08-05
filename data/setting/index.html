@@ -1,121 +1,60 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>設定</title>
-  <link rel="stylesheet" href="styles.css">
-  <script>
-
-    window.addEventListener('load', () => {
-      fetch('../../config.json')
-        .then(response => response.json())
-        .then(config => {
-          const theme = config.theme;
-          const themeLink = document.createElement('link');
-          themeLink.rel = 'stylesheet';
-          themeLink.href = `../css/theme${theme}.css`;
-          document.head.appendChild(themeLink);
-          updateThemeRadio(theme); 
-        })
-        .catch(error => {
-          console.error('Theme load error:', error);
-          const errorMsg = document.getElementById('errorMsg');
-          if (errorMsg) {
-            errorMsg.textContent = 'テーマの読み込みに失敗しました。';
-            errorMsg.style.display = 'block';
-            errorMsg.style.color = 'red';
-          }
-        });
-    });
-
-    function updateThemeRadio(selectedTheme) {
-      document.querySelectorAll('input[name="theme"]').forEach(radio => {
-        if (radio.value === selectedTheme) radio.checked = true;
-      });
-    }
-
-    function saveTheme(themeValue) {
-      fetch('../../config.json')
-        .then(response => response.json())
-        .then(config => {
-          config.theme = themeValue;
-          return fetch('../../config.json', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(config)
-          });
-        })
-        .then(() => {
-        
-          setTimeout(() => location.reload(), 1000);
-        })
-        .catch(error => {
-          console.error('Theme save error:', error);
-          const errorMsg = document.getElementById('errorMsg');
-          if (errorMsg) {
-            errorMsg.textContent = 'テーマの保存に失敗しました。';
-            errorMsg.style.display = 'block';
-            errorMsg.style.color = 'red';
-          }
-        });
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
+    <title>設定</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="header" id="header">
-    <span onclick="window.location.href='../../index.html'">←戻る</span>
-    <h1>設定</h1>
-  </div>
-  <div class="content" id="content">
-    <div class="sidebar">
-      <ul class="nav-tabs">
-        <li class="tab active" data-tab="general">一般</li>
-        <li class="tab" data-tab="model">モデル</li>
-        <li class="tab" data-tab="advanced">高度な設定</li>
-      </ul>
+    <div class="container">
+        <div class="sidebar">
+            <div class="menu-item">←戻る</div>
+            <div class="menu-item active">一般</div>
+            <div class="menu-item">モデル</div>
+        </div>
+        <div class="content">
+          
+            <div class="tab active" id="generalTab">
+                <h1>一般</h1>
+                <div class="setting-item">
+                    <label>ダウンロード先</label>
+                    <div class="input-group">
+                        <input type="text" id="downloadPath" placeholder="パスを選択してください" readonly>
+                        <button id="browseBtn">参照</button>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label>言語</label>
+                    <select id="language" disabled>
+                        <option value="ja">日本語</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>テーマ</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="theme" value="1"> 黒</label>
+                        <label><input type="radio" name="theme" value="2"> 白</label>
+                        <label><input type="radio" name="theme" value="3"> 青</label>
+                        <label><input type="radio" name="theme" value="4"> ピンク</label>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label>ショートカットを作成</label>
+                    <button id="createShortcutBtn">作成</button>
+                </div>
+            </div>
+           
+            <div class="tab" id="modelTab">
+                <h1>モデル</h1>
+                <div class="model-item" id="modelItem_Mero.2">
+                    <div class="model-select">Mero.2</div>
+                    <p>画像を2倍にスケールアップします。<br>より画像を鮮明にされます。</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="tab-content">
-      <div id="general" class="tab-pane active">
-        <h2>一般設定</h2>
-        <div class="setting-item">
-          <label>テーマ:</label>
-          <div>
-            <input type="radio" name="theme" value="1" onchange="saveTheme(this.value)"> ブラック
-            <input type="radio" name="theme" value="2" onchange="saveTheme(this.value)"> ホワイト
-            <input type="radio" name="theme" value="3" onchange="saveTheme(this.value)"> ブルー
-            <input type="radio" name="theme" value="4" onchange="saveTheme(this.value)"> ピンク
-          </div>
-        </div>
-        <div class="setting-item">
-          <label for="language">言語:</label>
-          <select id="language">
-            <option value="ja">日本語</option>
-            <option value="en">English</option>
-          </select>
-        </div>
-      </div>
-      <div id="model" class="tab-pane">
-        <h2>モデル設定</h2>
-        <p>開発中</p>
-      </div>
-      <div id="advanced" class="tab-pane">
-        <h2>高度な設定</h2>
-        <div class="setting-item">
-          <label for="quality">画質優先:</label>
-          <input type="checkbox" id="quality">
-        </div>
-        <div class="setting-item">
-          <label for="auto-update">自動更新:</label>
-          <input type="checkbox" id="auto-update">
-        </div>
-      </div>
-    </div>
-    <div style="text-align: center; margin-top: 20px;">
-      <p id="themeText">テキスト</p>
-    </div>
-    <span id="errorMsg" style="display: none;"></span>
-  </div>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
-</html> 
+</html>
