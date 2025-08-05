@@ -1,28 +1,39 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f5f5;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #a3e4d7, #87ceeb);
+    font-family: Arial, sans-serif;
 }
 
-.content {
-  text-align: center;
-  padding-top: 200px;
+.container {
+    text-align: center;
 }
 
-h2 {
-  margin-bottom: 20px;
+h1 {
+    margin-bottom: 20px;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.input-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
-button:hover {
-  background-color: #0056b3;
+#pathInput {
+    padding: 5px;
+    width: 300px;
+    height: 30px;
+}
+
+#browseBtn, #createShortcutBtn {
+    padding: 5px 10px;
+    height: 40px;
+    cursor: pointer;
+}
+
+#thankYouSection h1 {
+    line-height: 1.5;
 }
