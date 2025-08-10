@@ -52,6 +52,13 @@ dropZone.addEventListener('dragleave', (e) => {
 dropZone.addEventListener('drop', (e) => {
   e.preventDefault();
   console.log('Drop detected, files:', e.dataTransfer.files);
+  
+  const dtFile = e.dataTransfer.files[0];
+  if (imageInput) {
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(dtFile);
+    imageInput.files = dataTransfer.files;
+  }
   handleFiles(e.dataTransfer.files);
 });
 
@@ -98,6 +105,12 @@ function handleFiles(files) {
     if (dropZone) dropZone.style.display = 'none';
     if (selectedFileName) selectedFileName.textContent = `${file.name}が選択されています`;
     if (fileSelected) fileSelected.style.display = 'block';
+    // imageInputにファイルをセット（アップロード/ドロップ両対応）
+    if (imageInput) {
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      imageInput.files = dataTransfer.files;
+    }
   };
   reader.onerror = (error) => {
     console.error('FileReader error:', error);
