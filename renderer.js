@@ -184,11 +184,11 @@ async function upscaleImage() {
 
   try {
     const arrayBuffer = await file.arrayBuffer();
-    const sharpImage = sharp(arrayBuffer);
+    let sharpImage = sharp(arrayBuffer);
     const metadata = await sharpImage.metadata();
 
- 
-    const upscaledBuffer = await sharpImage
+    
+    sharpImage = sharpImage
       .resize({
         width: metadata.width * 2,
         height: metadata.height * 2,
@@ -196,13 +196,26 @@ async function upscaleImage() {
         fit: 'contain',
       })
       .sharpen({
-        sigma: 1,
-        flat: 1.0,
-        jagged: 2.0
+        sigma: 2,
+        flat: 2.0,
+        jagged: 3.0
       })
-      .toBuffer();
+      .modulate({
+        brightness: 1.05,
+        saturation: 1.08
+      });
 
-    if (upscaledImage) upscaledImage.src = `data:image/${file.type.split('/')[1]};base64,${upscaledBuffer.toString('base64')}`;
+    let upscaledBuffer;
+    const ext = file.type.split('/')[1];
+    if (ext === 'jpeg' || ext === 'jpg') {
+      upscaledBuffer = await sharpImage.jpeg({ quality: 95 }).toBuffer();
+    } else if (ext === 'png') {
+      upscaledBuffer = await sharpImage.png({ compressionLevel: 9 }).toBuffer();
+    } else {
+      upscaledBuffer = await sharpImage.toBuffer();
+    }
+
+    if (upscaledImage) upscaledImage.src = `data:image/${ext};base64,${upscaledBuffer.toString('base64')}`;
     if (upscaling) upscaling.style.display = 'none';
     if (completed) completed.style.display = 'block';
     console.log('Upscaling completed');
