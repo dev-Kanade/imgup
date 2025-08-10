@@ -150,21 +150,22 @@ backBtn.addEventListener('click', () => {
 });
 
 saveBtn.addEventListener('click', async () => {
-  let config = {};
-  try {
-    const data = await fs.readFile('config.json', 'utf8');
-    config = JSON.parse(data);
-  } catch (error) {
-    console.error('config.jsonの読み込みに失敗:', error);
-    config = { download: require('path').join(require('os').homedir(), 'Downloads') };
-  }
+  const { dialog } = require('@electron/remote');
   const file = imageInput.files[0];
   const newFilename = `${file.name.replace(/\.[^/.]+$/, '')}_2x.${file.type.split('/')[1]}`;
-  const downloadPath = require('path').join(config.download, newFilename);
   const upscaledData = upscaledImage.src.split(',')[1];
-  await fs.writeFile(downloadPath, Buffer.from(upscaledData, 'base64'));
-  alert('画像が保存されました。');
-  console.log('Image saved to:', downloadPath);
+  const result = await dialog.showSaveDialog({
+    title: '保存先を選択',
+    defaultPath: newFilename,
+    filters: [
+      { name: 'Images', extensions: [file.type.split('/')[1]] }
+    ]
+  });
+  if (!result.canceled && result.filePath) {
+    await fs.writeFile(result.filePath, Buffer.from(upscaledData, 'base64'));
+    alert('画像が保存されました。');
+    console.log('Image saved to:', result.filePath);
+  }
 });
 
 async function upscaleImage() {
