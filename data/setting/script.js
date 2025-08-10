@@ -17,22 +17,6 @@ document.querySelectorAll('.menu-item').forEach(item => {
 });
 
 
-document.getElementById('browseBtn').addEventListener('click', async () => {
-    try {
-        const result = await dialog.showOpenDialog({ properties: ['openDirectory'] });
-        if (!result.canceled && result.filePaths.length > 0) {
-            let selectedPath = result.filePaths[0].replace(/\\/g, '￥');
-            document.getElementById('downloadPath').value = selectedPath;
-            const configPath = '../../config.json';
-            const data = await fs.readFile(configPath, 'utf8');
-            let config = JSON.parse(data);
-            config.download = selectedPath;
-            await fs.writeFile(configPath, JSON.stringify(config, null, 2));
-        }
-    } catch (err) {
-        console.error('Error in browseBtn:', err);
-    }
-});
 
 
 document.querySelectorAll('input[name="theme"]').forEach(radio => {
