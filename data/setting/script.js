@@ -4,9 +4,13 @@ const fs = require('fs').promises;
 
 document.querySelectorAll('.menu-item').forEach(item => {
     item.addEventListener('click', () => {
+        if (item.textContent === '←戻る') {
+            window.location.href = '../../index.html';
+            return;
+        }
         document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
         item.classList.add('active');
-        const tabId = item.textContent === '←戻る' ? 'generalTab' : item.textContent === '一般' ? 'generalTab' : 'modelTab';
+        const tabId = item.textContent === '一般' ? 'generalTab' : 'modelTab';
         document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
         document.getElementById(tabId).classList.add('active');
     });
