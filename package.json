@@ -7,15 +7,17 @@
     "start": "electron .",
     "build": "electron-builder"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "electron-builder": "^26.0.12",
-    "electron": "^28.0.0"
+  "dependencies": {
+    "@electron/remote": "^2.1.3"
   },
-  "build":{
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
     "appId": "com.Projectmero.imgup",
     "productName": "IMGUP",
-    "directories":{
+    "directories": {
       "output": "dist"
     },
     "win": {

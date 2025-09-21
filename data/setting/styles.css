@@ -9,9 +9,12 @@ body {
 }
 
 .container {
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    width: 80%;
-    height: 80%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .sidebar {
@@ -98,4 +101,21 @@ h1 {
     color: white;
     cursor: pointer;
     border-radius: 5px;
+}
+
+/* 戻るボタンを文字のみのボタンに */
+.back-btn {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 8px 0;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.back-btn:focus {
+    outline: none;
+    box-shadow: none;
 }

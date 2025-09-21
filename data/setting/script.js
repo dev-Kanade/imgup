@@ -18,7 +18,6 @@ document.querySelectorAll('.menu-item').forEach(item => {
 
 
 
-
 document.querySelectorAll('input[name="theme"]').forEach(radio => {
     radio.addEventListener('change', async () => {
         if (radio.checked) {
@@ -67,4 +66,9 @@ document.querySelectorAll('.model-select').forEach(select => {
             console.error('Error saving model:', err);
         }
     });
+});
+
+// 戻るボタンのイベントリスナー追加
+document.querySelector('.back-btn').addEventListener('click', () => {
+    window.location.href = 'c:/Users/miyac/OneDrive/Dokumen/imgup/index.html';
 });
