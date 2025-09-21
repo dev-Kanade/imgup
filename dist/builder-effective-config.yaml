@@ -1,0 +1,16 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.Projectmero.imgup
+productName: IMGUP
+win:
+  target: nsis
+mac:
+  category: public.app-category.graphics-design
+linux:
+  target:
+    - AppImage
+    - deb
+  category: Graphics
+files: []
+electronVersion: 28.3.3
