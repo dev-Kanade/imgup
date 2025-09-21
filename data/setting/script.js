@@ -69,6 +69,10 @@ document.querySelectorAll('.model-select').forEach(select => {
 });
 
 
-document.querySelector('back-btn').addEventListener('click', () => {
-    ipcRenderer.send('go-back-to-home');
-});
+// 「←戻る」ボタンのイベントを修正
+const backBtn = document.getElementById('backBtn');
+if (backBtn) {
+    backBtn.addEventListener('click', () => {
+        window.location.href = '../../index.html';
+    });
+}
