@@ -1,6 +1,6 @@
 {
   "name": "image-upscaler",
-  "version": "1.00",
+  "version": "1.10",
   "devversion": "dev-2.3",
   "main": "main.js",
   "scripts": {
