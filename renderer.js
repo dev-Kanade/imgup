@@ -105,7 +105,6 @@ function handleFiles(files) {
     if (dropZone) dropZone.style.display = 'none';
     if (selectedFileName) selectedFileName.textContent = `${file.name}が選択されています`;
     if (fileSelected) fileSelected.style.display = 'block';
-    // imageInputにファイルをセット（アップロード/ドロップ両対応）
     if (imageInput) {
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(file);
