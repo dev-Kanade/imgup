@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
+    <title>設定</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="menu-item">←戻る</div>
+            <div class="menu-item active">一般</div>
+            <div class="menu-item">モデル</div>
+        </div>
+        <div class="content">
+          
+            <div class="tab active" id="generalTab">
+                <h1>一般</h1>
+                <div class="setting-item">
+                    <label>言語</label>
+                    <select id="language" disabled>
+                        <option value="ja">日本語</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>テーマ</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="theme" value="1"> 黒</label>
+                        <label><input type="radio" name="theme" value="2"> 白</label>
+                        <label><input type="radio" name="theme" value="3"> 青</label>
+                        <label><input type="radio" name="theme" value="4"> ピンク</label>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label>ショートカットを作成</label>
+                    <button id="createShortcutBtn">作成</button>
+                </div>
+            </div>
+           
+            <div class="tab" id="modelTab">
+                <h1>モデル</h1>
+                <div class="model-item" id="modelItem_Mero.2">
+                    <div class="model-select">Mero.2</div>
+                    <p>画像を2倍にスケールアップします。<br>より画像を鮮明にされます。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

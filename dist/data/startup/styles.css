@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #a3e4d7, #87ceeb);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#pathInput {
+    padding: 5px;
+    width: 300px;
+    height: 30px;
+}
+
+#browseBtn, #createShortcutBtn {
+    padding: 5px 10px;
+    height: 40px;
+    cursor: pointer;
+}
+
+#thankYouSection h1 {
+    line-height: 1.5;
+}

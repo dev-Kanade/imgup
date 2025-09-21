@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ダウンロードパス設定</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ダウンロード先のパスを指定</h1>
+        <div class="input-group">
+            <input type="text" id="pathInput" placeholder="パスを選択してください" readonly>
+            <button id="browseBtn">参照</button>
+        </div>
+        <div id="shortcutSection" style="display: none;">
+            <h1>デスクトップにショートカットを作成しますか？</h1>
+            <button id="createShortcutBtn">作成</button>
+        </div>
+        <div id="thankYouSection" style="display: none;">
+            <h1>ありがとうございます。<br>この画面のどこかをクリックで<br>画像をスケールアップします。</h1>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
