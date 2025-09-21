@@ -5,8 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder -wl",
-  　"build:linux": "electron-builder -l"
+    "build": "electron-builder -wl"
   },
   "dependencies": {
     "@electron/remote": "^2.1.3",
@@ -24,13 +23,6 @@
     },
     "win": {
       "target": "nsis"
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
-      "category": "Graphics"
     }
   }
 }
