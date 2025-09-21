@@ -68,7 +68,7 @@ document.querySelectorAll('.model-select').forEach(select => {
     });
 });
 
-// 戻るボタンのイベントリスナー追加
+
 document.querySelector('.back-btn').addEventListener('click', () => {
     window.location.href = 'c:/Users/miyac/OneDrive/Dokumen/imgup/index.html';
 });
