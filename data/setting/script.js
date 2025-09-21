@@ -4,7 +4,7 @@ const { ipcRenderer } = require('electron');
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // メニューイベント
+    
     document.querySelectorAll('.menu-item').forEach(item => {
         item.addEventListener('click', () => {
             if (item.textContent.trim() === '←戻る') { 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // テーマ変更
+  
     document.querySelectorAll('input[name="theme"]').forEach(radio => {
         radio.addEventListener('change', async () => {
             if (radio.checked) {
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ショートカット作成
+
     const shortcutBtn = document.getElementById('createShortcutBtn');
     if (shortcutBtn) {
         shortcutBtn.addEventListener('click', () => {
@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // モデル選択
     document.querySelectorAll('.model-select').forEach(select => {
         select.addEventListener('click', async () => {
             const modelId = select.parentElement.id.replace('modelItem_', '');
@@ -73,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ←戻るボタン
+  
     const backBtn = document.getElementById('backBtn');
     if (backBtn) {
         backBtn.addEventListener('click', () => {
