@@ -7,10 +7,7 @@
     "start": "electron .",
     "build": "electron-builder"
   },
-  "dependencies": {
-    "@electron/remote": "^2.0.8",
-    "sharp": "^0.32.6"
-  },
+  "dependencies": {},
   "devDependencies": {
     "electron-builder": "^26.0.12",
     "electron": "^28.0.0"
