@@ -109,7 +109,7 @@ h1 {
     color: #333;
     font-size: 1rem;
     cursor: pointer;
-    padding: 12px 24px; /* ボタンと同じぐらいの当たり判定 */
+    padding: 12px 24px;
     display: block;
     width: 100%;
     text-align: left;
@@ -123,15 +123,14 @@ h1 {
     box-shadow: none;
     color: inherit;
     cursor: pointer;
-    /* .menu-itemと同じサイズ・余白を継承 */
+
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 16px 0; /* .menu-itemと同じなら合わせてください */
+    padding: 16px 0;
     font-size: 1em;
 }
 
-/* ホバー時の枠線や背景も消す */
 #backBtn:hover, #backBtn:active {
     background: none;
     border: none;
