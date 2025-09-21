@@ -1,0 +1,9 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.Projectmero.imgup
+productName: IMGUP
+win:
+  target: nsis
+files: []
+electronVersion: 28.3.3
