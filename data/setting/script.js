@@ -1,10 +1,11 @@
 const { dialog } = require('@electron/remote');
 const fs = require('fs').promises;
+const { ipcRenderer } = require('electron');
 
 
 document.querySelectorAll('.menu-item').forEach(item => {
     item.addEventListener('click', () => {
-        if (item.textContent === '←戻る') {
+        if (item.textContent.trim() === '←戻る') { 
             window.location.href = '../../index.html';
             return;
         }
@@ -15,7 +16,6 @@ document.querySelectorAll('.menu-item').forEach(item => {
         document.getElementById(tabId).classList.add('active');
     });
 });
-
 
 
 document.querySelectorAll('input[name="theme"]').forEach(radio => {
@@ -69,6 +69,6 @@ document.querySelectorAll('.model-select').forEach(select => {
 });
 
 
-document.querySelector('.back-btn').addEventListener('click', () => {
-    window.location.href = 'c:/Users/miyac/OneDrive/Dokumen/imgup/index.html';
+document.querySelector('back-btn').addEventListener('click', () => {
+    ipcRenderer.send('go-back-to-home');
 });

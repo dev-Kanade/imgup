@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const fs = require('fs').promises;
 const remoteMain = require('@electron/remote/main'); 
 remoteMain.initialize(); 
@@ -46,5 +46,12 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
+    }
+});
+
+ipcMain.on('go-back-to-home', (event) => {
+    const win = BrowserWindow.getFocusedWindow();
+    if (win) {
+        win.loadFile('index.html');
     }
 });
