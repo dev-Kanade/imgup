@@ -1,0 +1,16 @@
+body {
+  background-color: #ffffff; 
+  color: #333;
+}
+
+#themeText {
+  color: #333;
+}
+
+.header {
+  background-color: #e0e0e0;
+}
+
+.drop-zone {
+  background-color: rgba(255, 255, 255, 0.8);
+}

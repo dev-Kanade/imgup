@@ -1,0 +1,16 @@
+body {
+  background: linear-gradient(135deg, #FF69B4, #FFB6C1); 
+  color: #333;
+}
+
+#themeText {
+  color: #333;
+}
+
+.header {
+  background-color: #C71585;
+}
+
+.drop-zone {
+  background-color: rgba(255, 255, 255, 0.8);
+}
