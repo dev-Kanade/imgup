@@ -3,6 +3,8 @@
   "version": "1.10.0",
   "devversion": "dev-2.3",
   "main": "main.js",
+  "description":"画像を鮮明に。",
+  "author":"project・Mero",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win --x64"
