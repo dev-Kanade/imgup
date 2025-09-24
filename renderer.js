@@ -1,4 +1,3 @@
-//スケールアップ処理ファイル
 const { ipcRenderer } = require('electron');
 const sharp = require('sharp');
 const fs = require('fs').promises;
