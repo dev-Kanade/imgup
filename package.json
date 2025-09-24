@@ -1,5 +1,5 @@
 {
-  "name": "image-upscaler",
+  "name": "imgup",
   "version": "1.10.0",
   "devversion": "dev-2.3",
   "main": "main.js",
