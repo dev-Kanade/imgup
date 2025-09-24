@@ -220,7 +220,7 @@ async function upscaleImage() {
     console.log('Upscaling completed');
   } catch (error) {
     console.error('Upscaling error:', error);
-    alert('画像のアップスケールに失敗しました。詳細はコンソールを確認してください。');
+    alert('画像のアップスケールに失敗しました。もう一度お試しください。');
     if (upscaling) upscaling.style.display = 'none';
     if (dropZone) dropZone.style.display = 'block';
     if (progressBar) progressBar.value = 0;
