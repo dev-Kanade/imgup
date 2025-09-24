@@ -93,7 +93,8 @@ function handleFiles(files) {
     return;
   }
 
-  if (!file.type.match('image/(png|jpeg)')) {
+  // TIFF, webpも対応
+  if (!file.type.match('image/(png|jpeg|tiff|webp)')) {
     showError('サポートしていないファイル形式です');
     return;
   }
@@ -186,7 +187,6 @@ async function upscaleImage() {
     let sharpImage = sharp(arrayBuffer);
     const metadata = await sharpImage.metadata();
 
-    
     sharpImage = sharpImage
       .resize({
         width: metadata.width * 2,
@@ -210,6 +210,10 @@ async function upscaleImage() {
       upscaledBuffer = await sharpImage.jpeg({ quality: 95 }).toBuffer();
     } else if (ext === 'png') {
       upscaledBuffer = await sharpImage.png({ compressionLevel: 9 }).toBuffer();
+    } else if (ext === 'tiff') {
+      upscaledBuffer = await sharpImage.tiff({ quality: 95 }).toBuffer();
+    } else if (ext === 'webp') {
+      upscaledBuffer = await sharpImage.webp({ quality: 95 }).toBuffer();
     } else {
       upscaledBuffer = await sharpImage.toBuffer();
     }
