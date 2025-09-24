@@ -5,6 +5,7 @@ remoteMain.initialize();
 
 let win;
 
+
 app.on('ready', async () => {
     win = new BrowserWindow({
         width: 800,
@@ -14,9 +15,13 @@ app.on('ready', async () => {
             nodeIntegration: true,
             contextIsolation: false,
             enableRemoteModule: true
+            
         },
+        
     });
+    
 
+    win.setMenu(null);
  
     remoteMain.enable(win.webContents);
 
