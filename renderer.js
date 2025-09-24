@@ -195,14 +195,14 @@ async function upscaleImage() {
         fit: 'contain',
       })
       .sharpen({
-        sigma: 3,      // より強いシャープ
-        flat: 3.0,     // 平坦部分を強調
-        jagged: 4.0    // エッジを強調
+        sigma: 3,      
+        flat: 3.0,     
+        jagged: 4.0    
       })
       .modulate({
-        brightness: 1.07,   // 少し明るく
-        saturation: 1.12,   // 彩度アップ
-        contrast: 1.15      // コントラスト強化
+        brightness: 1.07,   
+        saturation: 1.12,   
+        contrast: 1.15      
       });
 
     let upscaledBuffer;
