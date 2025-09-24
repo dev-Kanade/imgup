@@ -10,7 +10,7 @@ app.on('ready', async () => {
     win = new BrowserWindow({
         width: 800,
         height: 600,
-        icon: 'icon.png',
+        icon: 'icon.png',//アイコン★
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -35,7 +35,7 @@ app.on('ready', async () => {
             win.loadFile('index.html');
         }
     } catch (error) {
-        console.error('config.json読み込みエラー:', error);
+        console.error("[ERROR]構成ファイルの読み込みに失敗しました。");
         win.loadFile('index.html');
     }
 
