@@ -93,7 +93,7 @@ function handleFiles(files) {
     return;
   }
 
-  // TIFF, webpも対応
+ 
   if (!file.type.match('image/(png|jpeg|tiff|webp)')) {
     showError('サポートしていないファイル形式です');
     return;
