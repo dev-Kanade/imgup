@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "@emnapi/runtime": "^1.5.0",
-    "electron": "^28.0.0",
-    "electron-builder": "^28.0.0"
+    "electron": "^26.0.12",
+    "electron-builder": "^26.0.12"
   },
   "build": {
     "appId": "com.Projectmero.imgup",
