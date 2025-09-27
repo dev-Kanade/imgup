@@ -93,7 +93,8 @@ function handleFiles(files) {
     return;
   }
 
-  if (!file.type.match('image/(png|jpeg)')) {
+ 
+  if (!file.type.match('image/(png|jpeg|tiff|webp)')) {
     showError('サポートしていないファイル形式です');
     return;
   }
@@ -105,7 +106,6 @@ function handleFiles(files) {
     if (dropZone) dropZone.style.display = 'none';
     if (selectedFileName) selectedFileName.textContent = `${file.name}が選択されています`;
     if (fileSelected) fileSelected.style.display = 'block';
-    // imageInputにファイルをセット（アップロード/ドロップ両対応）
     if (imageInput) {
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(file);
@@ -187,7 +187,6 @@ async function upscaleImage() {
     let sharpImage = sharp(arrayBuffer);
     const metadata = await sharpImage.metadata();
 
-    
     sharpImage = sharpImage
       .resize({
         width: metadata.width * 2,
@@ -196,13 +195,14 @@ async function upscaleImage() {
         fit: 'contain',
       })
       .sharpen({
-        sigma: 2,
-        flat: 2.0,
-        jagged: 3.0
+        sigma: 3,      
+        flat: 3.0,     
+        jagged: 4.0    
       })
       .modulate({
-        brightness: 1.05,
-        saturation: 1.08
+        brightness: 1.07,   
+        saturation: 1.12,   
+        contrast: 1.15      
       });
 
     let upscaledBuffer;
@@ -211,6 +211,10 @@ async function upscaleImage() {
       upscaledBuffer = await sharpImage.jpeg({ quality: 95 }).toBuffer();
     } else if (ext === 'png') {
       upscaledBuffer = await sharpImage.png({ compressionLevel: 9 }).toBuffer();
+    } else if (ext === 'tiff') {
+      upscaledBuffer = await sharpImage.tiff({ quality: 95 }).toBuffer();
+    } else if (ext === 'webp') {
+      upscaledBuffer = await sharpImage.webp({ quality: 95 }).toBuffer();
     } else {
       upscaledBuffer = await sharpImage.toBuffer();
     }
@@ -221,7 +225,7 @@ async function upscaleImage() {
     console.log('Upscaling completed');
   } catch (error) {
     console.error('Upscaling error:', error);
-    alert('画像のアップスケールに失敗しました。詳細はコンソールを確認してください。');
+    alert('画像のアップスケールに失敗しました。もう一度お試しください。');
     if (upscaling) upscaling.style.display = 'none';
     if (dropZone) dropZone.style.display = 'block';
     if (progressBar) progressBar.value = 0;

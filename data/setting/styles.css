@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #a3e4d7, #87ceeb);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sidebar {
+    width: 20%;
+    background: linear-gradient(to bottom, #a3e4d7, #76c7c0);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-item {
+    padding: 10px;
+    background-color: #76c7c0;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.menu-item.active {
+    background-color: #4682b4;
+}
+
+.content {
+    width: 80%;
+    padding: 20px;
+    background: #87ceeb;
+}
+
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.setting-item {
+    margin-bottom: 15px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+#downloadPath {
+    padding: 5px;
+    width: 300px;
+    height: 30px;
+}
+
+#browseBtn, #createShortcutBtn {
+    padding: 5px 10px;
+    height: 40px;
+    cursor: pointer;
+}
+
+#language {
+    padding: 5px;
+    width: 150px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+}
+
+.model-item {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.model-select {
+    background: linear-gradient(to bottom, #a3e4d7, #76c7c0);
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 12px 24px;
+    display: block;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    box-shadow: none;
+}
+
+#backBtn {
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: inherit;
+    cursor: pointer;
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    font-size: 1em;
+}
+
+#backBtn:hover, #backBtn:active {
+    background: none;
+    border: none;
+    box-shadow: none;
+}

@@ -1,22 +1,27 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const fs = require('fs').promises;
 const remoteMain = require('@electron/remote/main'); 
 remoteMain.initialize(); 
 
 let win;
 
+
 app.on('ready', async () => {
     win = new BrowserWindow({
         width: 800,
         height: 600,
-        icon: 'icon.png',
+        icon: 'icon.png',//アイコン★
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
             enableRemoteModule: true
+            
         },
+        
     });
+    
 
+    win.setMenu(null);
  
     remoteMain.enable(win.webContents);
 
@@ -30,7 +35,7 @@ app.on('ready', async () => {
             win.loadFile('index.html');
         }
     } catch (error) {
-        console.error('config.json読み込みエラー:', error);
+        console.error("[ERROR]構成ファイルの読み込みに失敗しました。");
         win.loadFile('index.html');
     }
 
@@ -46,5 +51,12 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
+    }
+});
+
+ipcMain.on('go-back-to-home', (event) => {
+    const win = BrowserWindow.getFocusedWindow();
+    if (win) {
+        win.loadFile('index.html');
     }
 });
